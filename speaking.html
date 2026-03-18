@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Speaking Partner</title>
+    <style>
+        :root { --primary: #6366f1; --accent: #fd7e14; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding-top: 20px; }
+        
+        /* Navigation Link */
+        .back-home { text-decoration: none; color: var(--primary); font-weight: bold; margin-bottom: 20px; display: block; align-self: flex-start; margin-left: 20px; }
+
+        .card { max-width: 600px; width: 90%; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid var(--primary); text-align: center; }
+        
+        .avatar-wrapper { position: relative; display: inline-block; margin-bottom: 20px; }
+        #robot-img { width: 180px; height: 180px; border-radius: 50%; border: 4px solid #eee; transition: 0.3s; object-fit: cover; }
+        
+        /* Animation for when AI or User is speaking */
+        .active-glow { border-color: var(--accent) !important; box-shadow: 0 0 20px rgba(253, 126, 20, 0.5); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+
+        #transcript { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; min-height: 80px; margin: 20px 0; color: #475569; font-style: italic; text-align: left; }
+
+        .btn-group { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        button { border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 8px; }
+        
+        .btn-speak { background: #e0e7ff; color: var(--primary); }
+        .btn-mic { background: var(--accent); color: white; }
+        .btn-stop { background: #64748b; color: white; }
+        button:hover { opacity: 0.9; transform: translateY(-2px); }
+        
+        #playback { margin-top: 20px; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-home">← Back to Home</a>
+
+    <div class="card">
+        <div class="avatar-wrapper">
+            <img src="robot.jpg.png" id="robot-img" alt="Speaking Assistant">
+        </div>
+
+        <h2>🤖 AI Speaking Partner</h2>
+        <p id="robotText" style="color: #64748b; font-weight: 500;">"Hi! I'm listening. Tell me about your day."</p>
+        
+        <div id="transcript">Your speech will appear here in real-time...</div>
+
+        <div class="btn-group">
+            <button class="btn-speak" onclick="robotSpeak()">🔊 Hear Prompt</button>
+            <button class="btn-mic" id="startBtn" onclick="startRecording()">🎤 Start Recording</button>
+            <button class="btn-stop" onclick="stopRecording()">⏹ Stop & Get Feedback</button>
+        </div>
+
+        <audio id="playback" controls></audio>
+    </div>
+
+    <script src="speaking.js"></script>
+</body>
+</html>
