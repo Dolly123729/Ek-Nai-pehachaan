@@ -9,7 +9,7 @@ async function sendMessage() {
   document.getElementById("chat-input").value = "";
 
   try {
-    const response = await fetch("http://localhost:3000/chat", {
+    const response = await fetch("http://123.45.67.89:3000/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
