@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Reading & Listening Materials</title>
+    <style>
+        /* General Layout */
+        body { background-color: #f4f7f6; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        .material-container { max-width: 900px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #007bff; text-align: center; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 20px; }
+
+        /* Progress Bar */
+        .progress-wrapper { background: #eee; border-radius: 10px; height: 12px; margin-bottom: 30px; overflow: hidden; }
+        #progressBar { background: #28a745; width: 0%; height: 100%; transition: width 0.4s ease; }
+
+        /* List Styling */
+        .material-list { list-style: none; padding: 0; }
+        .material-item { 
+            background: #fff; padding: 18px; margin-bottom: 12px; 
+            border: 1px solid #eee; border-radius: 10px;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s;
+        }
+        .material-item.completed { border-left: 6px solid #28a745; background: #f0fff4; }
+        .material-item:hover { border-color: #007bff; transform: translateX(5px); }
+        
+        /* Buttons */
+        .tag { 
+            background: #007bff; color: white; padding: 8px 20px; 
+            border-radius: 6px; font-size: 14px; cursor: pointer; border: none; font-weight: bold;
+        }
+        .tag.listen-btn { background: #fd7e14; }
+
+        /* Reading Modal */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); }
+        .modal-content {
+            background-color: #fff; margin: 5% auto; padding: 40px;
+            border-radius: 15px; width: 90%; max-width: 800px;
+            position: relative; animation: slideDown 0.4s;
+        }
+        @keyframes slideDown { from {top: -100px; opacity: 0;} to {top: 0; opacity: 1;} }
+        .close-btn { position: absolute; right: 25px; top: 15px; font-size: 30px; cursor: pointer; color: #aaa; }
+        #modalBody { line-height: 1.8; font-size: 1.2rem; color: #333; margin: 25px 0; text-align: left; }
+    </style>
+</head>
+<body>
+
+<div class="material-container">
+    <a href="index.html" style="text-decoration: none; color: #007bff;">← Back to Home</a>
+    <h2>Reading & Listening: February 10, 2026</h2>
+    <p class="subtitle">Read paragraphs and listen to the audio to improve fluency.</p>
+
+    <div style="font-size: 1rem; font-weight: bold; margin-bottom: 8px;">Your Daily Progress: <span id="progressText">0/50</span></div>
+    <div class="progress-wrapper">
+        <div id="progressBar"></div>
+    </div>
+    
+    <ul class="material-list">
+        <li class="material-item">
+            <span>01. Reading: The Impact of Climate Change</span>
+            <button class="tag" onclick="showPractice(this, 'Climate Change', 'Current studies show that arctic ice is melting at an alarming rate. This leads to rising sea levels, which threatens coastal cities globally. Scientists are urging governments to switch to renewable energy sources like wind and solar to reduce carbon footprints before the year 2030.')">Read</button>
+        </li>
+
+        <li class="material-item">
+            <span>02. Reading: The History of the Internet</span>
+            <button class="tag" onclick="showPractice(this, 'Internet History', 'The internet began as a small project called ARPANET in the 1960s. It was designed for military and academic communication. Today, it connects billions of people, allowing for instant communication and the sharing of information across every continent.')">Read</button>
+        </li>
+
+        <li class="material-item">
+            <span>03. Reading: Space Exploration in 2026</span>
+            <button class="tag" onclick="showPractice(this, 'Mars Mission', 'By 2026, private companies and space agencies are working together to build a permanent base on the Moon. This lunar base will act as a stepping stone for the first human mission to Mars, which is expected to take place in the next decade.')">Read</button>
+        </li>
+
+        <li class="material-item">
+            <span>04. Listening: The Forest Secret (Chapter 1)</span>
+            <button class="tag listen-btn" onclick="showPractice(this, 'The Forest', 'Deep inside the ancient forest, there is a tree that glows at night. Local villagers say the tree holds the memories of the earth. Young Leo decided to find it, carrying only a small lantern and his grandfathers old map.')">Listen</button>
+        </li>
+
+        <li class="material-item">
+            <span>05. Listening: Interview with a Scientist</span>
+            <button class="tag listen-btn" onclick="showPractice(this, 'Science Podcast', 'The most important thing for students to learn, says Dr. Aris, is curiosity. Dont just accept the answer. Ask why. Science isnt about knowing everything; it is about the journey of discovery and the courage to be wrong.')">Listen</button>
+        </li>
+        
+        </ul>
+</div>
+
+<div id="practiceModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3 id="modalTitle" style="color:#007bff; border-bottom: 2px solid #eee; padding-bottom: 10px;">Task Title</h3>
+        <div id="modalBody">Content...</div>
+        <div style="margin-top: 30px; text-align: center; border-top: 1px solid #eee; padding-top: 20px;">
+            <button class="tag listen-btn" style="padding: 12px 25px;" onclick="speakText()">🔊 Listen to Story</button>
+            <button class="tag" onclick="closeModal()" style="background:#666; margin-left: 10px;">Close</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let completedCount = 0;
+    const totalItems = 50;
+
+    function showPractice(btn, title, content) {
+        const item = btn.parentElement;
+        if (!item.classList.contains('completed')) {
+            item.classList.add('completed');
+            completedCount++;
+            updateProgress();
+        }
+
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalBody').innerText = content;
+        document.getElementById('practiceModal').style.display = 'block';
+    }
+
+    function updateProgress() {
+        const percent = (completedCount / totalItems) * 100;
+        document.getElementById('progressBar').style.width = percent + "%";
+        document.getElementById('progressText').innerText = completedCount + "/" + totalItems;
+    }
+
+    function closeModal() {
+        document.getElementById('practiceModal').style.display = 'none';
+        window.speechSynthesis.cancel();
+    }
+
+    function speakText() {
+        window.speechSynthesis.cancel();
+        let text = document.getElementById('modalBody').innerText;
+        let speech = new SpeechSynthesisUtterance(text);
+        speech.rate = 0.9; // Slightly slower for better listening
+        window.speechSynthesis.speak(speech);
+    }
+
+    window.onclick = function(e) { if (e.target.className === 'modal') closeModal(); }
+</script>
+</body>
+</html>

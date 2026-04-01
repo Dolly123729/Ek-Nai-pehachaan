@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – Ek nai Pehchaan</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="contact.js"></script>
+</head>
+<body>
+  <!-- 🌐 Multi-Language Switcher -->
+<div id="google_translate_element" style="text-align:right; margin:10px;"></div>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,hi,ta,te,bn,ml,mr,gu,kn,pa,ur', 
+      // hi=Hindi, ta=Tamil, te=Telugu, bn=Bengali, ml=Malayalam,
+      // mr=Marathi, gu=Gujarati, kn=Kannada, pa=Punjabi, ur=Urdu
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+
+<script type="text/javascript"
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <h1>Ek nai Pehchaan</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="tools.html">AI Tools</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a href="dashboard.html">Dashboard</a>
+
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="small-hero">
+    <h2>Contact & Enrollment</h2>
+    <p>Want to learn more about our AI learning tools or join as a student? Fill out this form and we’ll get in touch with you soon!</p>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="contact-section">
+     <form id="contactForm" class="contact-form">
+
+
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+      <label for="message">Your Message</label>
+      <textarea id="message" name="message" rows="5" placeholder="Write your message or question..." required></textarea>
+
+      <button type="submit" class="btn">Send Message</button>
+      <p id="form-status"></p>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Learn Smart

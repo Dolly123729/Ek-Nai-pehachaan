@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn Smart – English Quizzes</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="quiz.js"></script>
+</head>
+
+<body>
+
+<!-- 🌐 Language Switcher -->
+<div id="google_translate_element" style="text-align:right; margin: 10px;"></div>
+
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      { pageLanguage: 'en', includedLanguages: 'en,hi' },
+      'google_translate_element'
+    );
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- Navbar -->
+<header class="navbar">
+  <h1>LearnSmart</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="tools.html">AI Tools</a>
+    <a href="quiz.html" class="active">Quiz</a>
+    <a href="contact.html">Contact</a>
+    <a href="dashboard.html">Dashboard</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="small-hero">
+  <h2>English Practice Quizzes</h2>
+  <p>Choose a category to start practicing.</p>
+</section>
+
+<!-- Quiz Menu -->
+<section class="features">
+  <div class="feature-grid">
+    <div class="card" onclick="loadQuiz('vocabulary')">
+      <h4>Vocabulary Quiz</h4>
+      <p>Improve word meanings and spelling.</p>
+    </div>
+
+    <div class="card" onclick="loadQuiz('grammar')">
+      <h4>Grammar Quiz</h4>
+      <p>Practice sentence structure and rules.</p>
+    </div>
+
+    <div class="card" onclick="loadQuiz('reading')">
+      <h4>Reading & Writing Quiz</h4>
+      <p>Test comprehension and understanding.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Quiz Area -->
+<section id="quiz-area" class="quiz-container hidden">
+  <h3 id="quiz-title"></h3>
+  <div id="question-box"></div>
+  <button class="btn" onclick="submitQuiz()">Submit Answers</button>
+  <p id="result"></p>
+</section>
+
+<footer>
+  <p>© 2025 Learn Smart · New Delhi, India 🇮🇳</p>
+</footer>
+
+</body>
+</html>

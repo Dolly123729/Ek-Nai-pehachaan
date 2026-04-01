@@ -1,0 +1,146 @@
+grammar-practice.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Mastery: 200 Challenges</title>
+    <style>
+        body { background-color: #f4f7f6; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        .material-container { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #28a745; text-align: center; } /* Green theme for Grammar */
+        
+        /* Progress Bar */
+        .progress-wrapper { background: #eee; border-radius: 10px; height: 12px; margin-bottom: 25px; overflow: hidden; }
+        #progressBar { background: #28a745; width: 0%; height: 100%; transition: width 0.4s ease; }
+
+        /* List Styling */
+        .material-list { list-style: none; padding: 0; }
+        .material-item { 
+            background: #fff; padding: 15px; margin-bottom: 10px; 
+            border: 1px solid #eee; border-radius: 8px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .material-item.completed { border-left: 6px solid #28a745; background: #f0fff4; }
+        
+        .tag { background: #28a745; color: white; padding: 8px 20px; border-radius: 5px; cursor: pointer; border: none; font-weight: bold; }
+        
+        /* Modal for Rules */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+        .modal-content { background: #fff; margin: 12% auto; padding: 30px; border-radius: 15px; width: 85%; max-width: 550px; text-align: left; animation: slideIn 0.3s; }
+        @keyframes slideIn { from {transform: translateY(-50px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
+    </style>
+</head>
+<body>
+
+    <!-- ===== LEVEL FILTER ===== -->
+<div style="text-align:center; margin: 20px 0;">
+  <button class="tag" onclick="filterLevel('all')">All Levels</button>
+  <button class="tag" onclick="filterLevel('beginner')">🟢 Beginner</button>
+  <button class="tag" onclick="filterLevel('intermediate')">🟡 Intermediate</button>
+  <button class="tag" onclick="filterLevel('advanced')">🔴 Advanced</button>
+</div>
+
+
+<div class="material-container">
+    <a href="index.html" style="text-decoration: none; color: #28a745; font-weight: bold;">← Back to Home</a>
+    <h2>Grammar Practice: 200 Daily Challenges</h2>
+    <p style="text-align: center; color: #666;">Master essential rules with exercises and AI corrections.</p>
+    
+    <div style="font-size: 1rem; font-weight: bold; margin-bottom: 8px;">Grammar Progress: <span id="progressText">0/200</span></div>
+    <div class="progress-wrapper"><div id="progressBar"></div></div>
+    
+    <ul class="material-list" id="grammarList">
+        <li class="material-item beginner">
+  <span>01. Subject-Verb Agreement</span>
+  <button class="tag" onclick="showGrammar(this,'Subject-Verb','Rule: Singular subjects take singular verbs.')">Learn</button>
+</li>
+<li class="material-item intermediate locked">
+  <span>02. Present Continuous Tense 🔒</span>
+  <button class="tag" disabled>Locked</button>
+</li>
+
+<li class="material-item intermediate locked">
+  <span>04. Past Simple (Regular) 🔒</span>
+  <button class="tag" disabled>Locked</button>
+</li>
+<li class="material-item advanced locked">
+  <span>08. Future: Will vs Going To 🔒</span>
+  <button class="tag" disabled>Locked</button>
+</li>
+
+
+<li class="material-item beginner">
+  <span>03. Articles: A vs An</span>
+  <button class="tag" onclick="showGrammar(this,'Articles','Use A before consonant sounds, An before vowel sounds.')">Learn</button>
+</li>
+
+        <li class="material-item"><span>01. Subject-Verb Agreement</span><button class="tag" onclick="showGrammar(this, 'Subject-Verb', 'Rule: Singular subjects take singular verbs.<br><br><b>Correct:</b> The student <u>is</u> reading.<br><b>Incorrect:</b> The student <u>are</u> reading.')">Learn</button></li>
+        <li class="material-item"><span>02. Present Continuous Tense</span><button class="tag" onclick="showGrammar(this, 'Present Continuous', 'Use: Actions happening <u>right now</u>.<br><b>Formula:</b> Am/Is/Are + Verb-ing.<br><br>Example: She is studying for her exam.')">Learn</button></li>
+        <li class="material-item"><span>03. Articles: A vs An</span><button class="tag" onclick="showGrammar(this, 'Articles', 'Use <b>An</b> before vowel sounds (A, E, I, O, U).<br><br>Example: An honest man (H is silent), A unique gift (U sounds like Y).')">Learn</button></li>
+        <li class="material-item"><span>04. Past Simple (Regular)</span><button class="tag" onclick="showGrammar(this, 'Past Simple', 'Rule: Actions finished in the past.<br><b>Formula:</b> Verb + ed.<br><br>Example: We visited the library yesterday.')">Learn</button></li>
+        <li class="material-item"><span>05. Prepositions of Time: In, On, At</span><button class="tag" onclick="showGrammar(this, 'Prepositions', '<b>At:</b> Precise time (At 10:00 AM).<br><b>On:</b> Days (On Monday).<br><b>In:</b> Months/Years (In February).')">Learn</button></li>
+        <li class="material-item"><span>06. Modals of Ability: Can/Could</span><button class="tag" onclick="showGrammar(this, 'Modals', '<b>Can:</b> Present ability (I can speak).<br><b>Could:</b> Past ability (I could swim when I was five).')">Learn</button></li>
+        <li class="material-item"><span>07. Comparative Adjectives</span><button class="tag" onclick="showGrammar(this, 'Comparatives', 'Rule: Comparing two things.<br><b>Short words:</b> Adj + er (Faster).<br><b>Long words:</b> More + Adj (More beautiful).')">Learn</button></li>
+        <li class="material-item"><span>08. Future: Will vs Going To</span><button class="tag" onclick="showGrammar(this, 'Future Tense', '<b>Will:</b> Snap decisions.<br><b>Going To:</b> Pre-planned actions.')">Learn</button></li>
+        <li class="material-item"><span>09. Irregular Plural Nouns</span><button class="tag" onclick="showGrammar(this, 'Plurals', 'Some nouns change form completely.<br><br>Example: Person -> People, Mouse -> Mice, Foot -> Feet.')">Learn</button></li>
+        <li class="material-item"><span>10. Possessive Pronouns</span><button class="tag" onclick="showGrammar(this, 'Possessives', 'Show ownership without repeating the noun.<br><br>Example: That book is <b>mine</b> (not my book).')">Learn</button></li>
+    </ul>
+</div>
+
+<div id="grammarModal" class="modal">
+    <div class="modal-content">
+        <h3 id="modalTitle" style="color: #28a745;">Rule</h3>
+        <hr style="border: 1px solid #eee;">
+        <p id="modalBody" style="line-height: 1.6; font-size: 1.1rem; color: #444; margin: 20px 0;"></p>
+        <div style="text-align: right;">
+            <button class="tag" onclick="closeModal()" style="background:#666;">Close</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let count = 0;
+    const total = 200;
+
+    function showGrammar(btn, title, body) {
+        if(!btn.parentElement.classList.contains('completed')) {
+            btn.parentElement.classList.add('completed');
+            count++;
+            updateProgress();
+        }
+        document.getElementById('modalTitle').innerHTML = title;
+        document.getElementById('modalBody').innerHTML = body;
+        document.getElementById('grammarModal').style.display = 'block';
+    }
+
+    function updateProgress() {
+        document.getElementById('progressBar').style.width = (count/total)*100 + "%";
+        document.getElementById('progressText').innerText = count + "/200";
+        function unlockNextLevel() {
+  if (beginnerDone === beginnerTotal) {
+    document.querySelectorAll('.material-item.intermediate.locked').forEach(item => {
+      item.classList.remove('locked');
+      item.querySelector('span').innerText = item.querySelector('span').innerText.replace(' 🔒','');
+      item.querySelector('button').disabled = false;
+      item.querySelector('button').innerText = 'Learn';
+    });
+  }
+
+  if (intermediateDone === intermediateTotal) {
+    document.querySelectorAll('.material-item.advanced.locked').forEach(item => {
+      item.classList.remove('locked');
+      item.querySelector('span').innerText = item.querySelector('span').innerText.replace(' 🔒','');
+      item.querySelector('button').disabled = false;
+      item.querySelector('button').innerText = 'Learn';
+    });
+  }
+}
+
+    }
+
+    function closeModal() { document.getElementById('grammarModal').style.display = 'none'; }
+    window.onclick = function(e) { if (e.target.className === 'modal') closeModal(); }
+</script>
+</body>
+</html>
